@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>crab</title>
+		<style type="text/css">
+			body{
+				background: #0000FF;
+				color: #fff;
+			}
+			#ing2{
+				display: inline-block;
+				width: 100px;
+				height: 20px;
+				border: 1px solid red;
+				overflow: hidden;
+			}
+			#ing3{
+				display: inline-block;
+				height: 20px;
+				background: yellow;
+			}
+		</style>
+	</head>
+	<body>
+		<input type="button" value="点击开始" onclick="start()"/>
+		<input type="button" value="点击停止" onclick="stop()"/>
+		<span id="ing1">
+			游戏进行了0秒
+		</span>
+		<span id="ing2">
+			<span id="ing3">
+			
+		    </span>
+		</span>
+
+		
+		
+		
+	</body>
+</html>
+		<script type="text/javascript">
+			var count = 0;
+			var pangxie;
+			var time = 0;
+			var sj;
+			function start(){
+				sj = setInterval("shijian()",1000);
+				pangxie = setInterval("crab()",400);
+			}
+			function crab(){
+				//创建螃蟹对象
+				var obj = document.createElement("img");
+				//设置螃蟹的随机宽度
+				var w = Math.floor(Math.random()*80+20);
+				obj.width = w;
+				//随机的出现位置
+				var x = Math.floor(Math.random()*1400+60);
+				var y = Math.floor(Math.random()*500+60);
+				obj.style.position = "absolute";
+				obj.style.top = y + "px";
+				obj.style.left = x + "px";
+				obj.src = "./crab.jpg";
+				document.body.appendChild(obj);
+				obj.onclick = removercrab;
+				count++;
+				var ing3 = document.getElementById("ing3");
+				ing3.style.width = count * 5 + "px";
+				if(count > 20){
+					alert("游戏结束");
+					clearInterval(pangxie);
+					location.reload();
+				}
+			}
+			function stop(){
+				alert("暂停游戏");
+				clearInterval(crab);
+				clearInterval(sj);
+			}
+			
+			function removercrab(){
+				count--;
+				var ing3 = document.getElementById("ing3");
+				ing3.style.width = count * 5 + "px";
+				//删除被点击的小星星
+				this.parentNode.removeChild(this);
+			}
+			
+			function shijian(){
+				time++;
+				var miao = document.getElementById("ing1");
+				ing1.innerHTML = "游戏进行" + time + "秒";
+			}
+			
+			
+			
+			
+			
+			
+			
+		</script>
